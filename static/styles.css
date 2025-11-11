@@ -1,0 +1,144 @@
+*{ margin:0; padding:0; }
+
+body{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('/static/login_bg.png');   /* Update path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: sans-serif;
+}
+
+
+main{
+  background-color: rgba(233, 233, 233, 0.75); /* slightly see-through */
+  backdrop-filter: blur(4px);  /* smooth blur */
+  width: 500px;
+  min-height: 700px;
+  margin: 6% auto 4%;
+  box-shadow: 0 30px 50px rgba(0,0,0,0.2);
+  box-sizing: border-box;
+  padding: 30px;
+  border-radius: 16px;
+}
+
+main form input{
+  width: 90%;
+  border: 3px solid black;
+  border-radius: 15px;
+  padding: 20px;
+  font-size: 18px;
+  background-color: transparent;
+  box-shadow: 2px 3px 4px rgba(0,0,0,0.2);
+  margin: 0 auto 20px;
+  display: block;
+}
+
+.textarea{
+  width: 90%;
+  border: 3px solid black;
+  border-radius: 15px;
+  padding: 20px;
+  font-size: 18px;
+  background-color: transparent;
+  box-shadow: 2px 3px 4px rgba(0,0,0,0.2);
+  margin: 0 auto;
+  display: block;
+}
+
+main form button{
+  width: 300px;
+  height: 60px;
+  border-radius: 15px;
+  display: block;
+  margin: 20px auto 30px;
+  text-align: center;
+  font-weight: bold;
+  background-color: yellowgreen;
+  cursor: pointer;
+  border: none;
+}
+
+main p{
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: brown;
+  text-align: center;
+}
+
+main .showUser{
+  background-image: url('/static/userLogo.png'); /* add file if you like */
+  margin: 20px auto;
+  width: 200px;
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+main .loginLogo{
+  margin: 40px auto 0;
+  width: 200px;
+  height: 200px;
+  background-image: url('/static/loginLogo.png'); /* add file if you like */
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+}
+
+/* flash messages */
+.flash { list-style: none; margin: 10px auto 20px; padding: 0; width: 90%; }
+.flash li { background: #fff3cd; border: 1px solid #ffeeba; padding: 10px; margin-bottom: 8px; border-radius: 8px; color: #856404; }
+
+/* password field wrapper */
+.pwd-field { width: 90%; margin: 0 auto; display: flex; gap: 8px; align-items: center; }
+.pwd-field input { flex: 1; }
+.pwd-field .toggle {
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #000;
+  background: #f1f1f1;
+  font-weight: 600;
+  cursor: pointer;
+  height: 52px;
+}
+
+.matchMsg { display:block; text-align:center; margin:8px 0; }
+
+/* === Password field: full-width input + tiny toggle button === */
+.pwd-field{
+  position: relative;
+  width: 90%;
+  margin: 0 auto 20px;   /* match spacing of other inputs */
+  display: block;        /* stop flex squeezing */
+}
+
+/* make the input full width like name/mobile/email/address */
+.pwd-field input{
+  width: 82% !important;   /* override earlier 90% + flex styles */
+  display: block !important;
+  padding-right: 70px;       /* space so text doesn't go under the button */
+}
+
+/* make the toggle very small and overlay it on the right side */
+.pwd-field .toggle{
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 32px;              /* small button */
+  padding: 0 10px;           /* short horizontal length */
+  font-size: 12px;
+  line-height: 1;
+  border: 1px solid #000;
+  border-radius: 8px;
+  background: #f1f1f1;
+  cursor: pointer;
+}
+
+/* keep the match message nicely spaced */
+.matchMsg{ display:block; text-align:center; margin:8px 0; }

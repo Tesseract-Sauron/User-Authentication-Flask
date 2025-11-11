@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UserAuthentication Sign Up</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <main>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flash">
+          {% for m in messages %}<li>{{ m }}</li>{% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="post" action="{{ url_for('add_user') }}" id="signupForm" novalidate>
+      <!-- 1) Name -->
+      <input type="text" name="name" placeholder="Full Name"
+             pattern="[A-Za-z][A-Za-z\s]{1,49}" required
+             title="Letters/spaces only, 2–50 characters">
+      <br>
+
+      <!-- 2) Mobile -->
+      <input type="tel" name="mobile" placeholder="Mobile (10 digits)"
+             pattern="\d{10}" required
+             title="Enter a 10-digit mobile number">
+      <br>
+
+      <!-- 3) Email -->
+      <input type="email" name="email" placeholder="Email" required>
+      <br>
+
+      <!-- 4) Address -->
+      <textarea name="address" placeholder="Address" rows="3" class="textarea"></textarea>
+      <br>
+
+      <!-- 5) Password (show/hide) -->
+      <div class="pwd-field">
+        <input id="password" type="password" name="password"
+               placeholder="Password"
+               required
+               pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}"
+               title="8+ chars with upper, lower, digit, and special char">
+        <button type="button" class="toggle" data-target="password">Show</button>
+      </div>
+      <br>
+
+      <!-- 6) Re-enter password (show/hide) -->
+      <div class="pwd-field">
+        <input id="confirm_password" type="password" name="confirm_password"
+               placeholder="Re-enter Password" required>
+        <button type="button" class="toggle" data-target="confirm_password">Show</button>
+      </div>
+      <small id="matchMsg" class="matchMsg"></small>
+
+      <br>
+      <button type="submit">create account</button> 
+    </form>
+
+    <p>Already have an account?<br><a href="{{ url_for('login') }}">login</a></p>
+  </main>
+
+  <script>
+    // Show/Hide toggles
+    document.querySelectorAll(".toggle").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-target");
+        const input = document.getElementById(id);
+        if (input.type === "password") {
+          input.type = "text";
+          btn.textContent = "Hide";
+        } else {
+          input.type = "password";
+          btn.textContent = "Show";
+        }
+      });
+    });
+
+    // Password match indicator
+    const pwd = document.getElementById("password");
+    const cfm = document.getElementById("confirm_password");
+    const msg = document.getElementById("matchMsg");
+
+    function checkMatch(){
+      if (!pwd.value || !cfm.value) { msg.textContent = ""; return; }
+      if (pwd.value === cfm.value) {
+        msg.textContent = "Passwords match ✓";
+        msg.style.color = "green";
+      } else {
+        msg.textContent = "Passwords do not match";
+        msg.style.color = "red";
+      }
+    }
+    pwd.addEventListener("input", checkMatch);
+    cfm.addEventListener("input", checkMatch);
+
+    // Client-side guard
+    document.getElementById("signupForm").addEventListener("submit", function(e){
+      if (pwd.value !== cfm.value) {
+        e.preventDefault();
+        alert("Passwords do not match.");
+      }
+    });
+  </script>
+</body>
+</html>

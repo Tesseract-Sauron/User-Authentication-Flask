@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UserAuthentication Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <main>
+    <h1>Welcome, {{ fname }} {{ lname }}</h1>
+    <h2>Email : {{ email }}</h2>
+
+    <div class="showUser" role="img" aria-label="User avatar"></div>
+
+    <p style="margin-top: 30px; text-align:center;">
+      <a href="{{ url_for('logout') }}">Logout</a>
+    </p>
+  </main>
+</body>
+</html>
